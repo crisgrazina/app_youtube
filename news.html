@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notícias em alta</title>
+</head>
+<body>
+    <h1>Notícias em alta</h1>
+
+    <ul id="news-list">
+        <!-- Aqui serão adicionados os itens de notícia -->
+    </ul>
+
+    <script>
+        // Sua chave de API do Google News
+        const apiKey = '1b0eb3cb9ae44db8a6ed62e612db21c9';
+
+        // O ID da fonte de notícias que você deseja usar
+        const sourceId = 'google-news';
+
+        // Faz a chamada à API do Google News para obter as últimas notícias em alta
+        fetch(`https://newsapi.org/v2/top-headlines?sources=${sourceId}&apiKey=${apiKey}`)
+            .then(response => response.json()) // Converte a resposta em um objeto JavaScript
+            .then(data => {
+                // Pega a lista de notícias
+                const newsList = document.querySelector('#news-list');
+
+                // Itera pelos artigos da resposta e adiciona cada um à lista
+                data.articles.forEach(article => {
+                    const listItem = document.createElement('li');
+                    listItem.innerText = article.title;
+                    newsList.appendChild(listItem);
+                });
+            });
+    </script>
+</body>
+</html>
