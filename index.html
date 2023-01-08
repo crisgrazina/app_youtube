@@ -11,11 +11,7 @@
 
     <script>
       // Obtém a resposta da API do YouTube
-      fetch("https://www.googleapis.com/youtube/v3/trending", {
-        headers: {
-          "key": "AIzaSyCWcrX5rlZMOzWnMdT-oe6PXslfiqE8cvk"
-        }
-      }).then(response => response.json()).then(data => {
+      fetch("https://www.googleapis.com/youtube/v3/trending?key=AIzaSyCWcrX5rlZMOzWnMdT-oe6PXslfiqE8cvk&part=snippet").then(response => response.json()).then(data => {
         // Carrega a resposta como um objeto JavaScript
 
         // Seleciona o elemento UL na página
@@ -31,3 +27,4 @@
     </script>
   </body>
 </html>
+
