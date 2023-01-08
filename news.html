@@ -17,8 +17,11 @@
         // O ID da fonte de notícias que você deseja usar
         const sourceId = 'google-news';
 
-        // Faz a chamada à API do Google News para obter as últimas notícias em alta
-        fetch(`https://newsapi.org/v2/top-headlines?sources=${sourceId}&apiKey=${apiKey}`)
+        // URL do proxy que você vai usar
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+
+        // Faz a chamada à API do Google News através do proxy
+        fetch(`${proxyUrl}https://newsapi.org/v2/top-headlines?sources=${sourceId}&apiKey=${apiKey}`)
             .then(response => response.json()) // Converte a resposta em um objeto JavaScript
             .then(data => {
                 // Pega a lista de notícias
@@ -34,3 +37,4 @@
     </script>
 </body>
 </html>
+
