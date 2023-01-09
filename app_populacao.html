@@ -1,24 +1,72 @@
 <html>
 <head>
     <style>
-        body {
-            background-color: yellow;
-        }
-        .dark-mode {
-            background-color: #333;
+        /* Estilos para o avião */
+        .airplane {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background-color: blue;
         }
     </style>
 </head>
 <body>
-    <button id="toggle-dark-mode">On/Off</button>
+    <!-- Div para o avião -->
+    <div class="airplane"></div>
 
     <script>
-        const toggleDarkMode = document.getElementById('toggle-dark-mode');
+        // Obtenha o elemento do avião
+        const airplane = document.querySelector('.airplane');
 
-        toggleDarkMode.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
+        // Defina os limites da tela
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        // Defina a velocidade do avião
+        const speed = 5;
+
+        // Crie um objeto para armazenar as teclas pressionadas
+        const keys = {};
+
+        // Adicione um evento de teclado para monitorar as teclas pressionadas
+        document.addEventListener('keydown', (event) => {
+            keys[event.key] = true;
         });
+
+        document.addEventListener('keyup', (event) => {
+            keys[event.key] = false;
+        });
+
+        // Crie uma função para atualizar a posição do avião
+        function updatePosition() {
+            // Obtenha a posição atual do avião
+            let left = airplane.offsetLeft;
+            let top = airplane.offsetTop;
+
+            // Verifique as teclas pressionadas e atualize a posição do avião
+            if (keys['ArrowUp']) top -= speed;
+            if (keys['ArrowDown']) top += speed;
+            if (keys['ArrowLeft']) left -= speed;
+            if (keys['ArrowRight']) left += speed;
+
+            // Verifique se o avião saiu da tela e o mantenha dentro dos limites
+            if (left < 0) left = 0;
+            if (left > screenWidth - airplane.offsetWidth) left = screenWidth - airplane.offsetWidth;
+            if (top < 0) top = 0;
+            if (top > screenHeight - airplane.offsetHeight) top = screenHeight - airplane.offsetHeight;
+
+            // Atualize a posição do avião
+            airplane.style.left = `${left}px`;
+            airplane.style.top = `${top}px`;
+        }
+
+        // Chame a função de atualização a cada 10 milissegundos
+        setInterval(updatePosition, 10);
     </script>
 </body>
 </html>
+
 
