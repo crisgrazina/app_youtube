@@ -30,69 +30,25 @@
       </tr>
       <tr>
         <td>Brasil</td>
-        <td>Loading...</td>
+        <td>212559417</td>
       </tr>
       <tr>
         <td>Estados Unidos</td>
-        <td>Loading...</td>
+        <td>331002651</td>
       </tr>
       <tr>
         <td>Canadá</td>
-        <td>Loading...</td>
+        <td>37411047</td>
       </tr>
       <tr>
         <td>França</td>
-        <td>Loading...</td>
+        <td>65273511</td>
       </tr>
       <tr>
         <td>Alemanha</td>
-        <td>Loading...</td>
+        <td>83783942</td>
       </tr>
     </table>
-
-    <script>
-      // Variáveis globais
-      var table, rows;
-
-      // Executa quando o documento é carregado
-      window.addEventListener('load', function() {
-        // Obtém referências aos elementos da página
-        table = document.querySelector('#popTable');
-        rows = table.rows;
-
-        // Chama a função de busca de população para cada país
-        getPopulation('Brazil', updateRow);
-        getPopulation('United States', updateRow);
-        getPopulation('Canada', updateRow);
-        getPopulation('France', updateRow);
-        getPopulation('Germany', updateRow);
-      });
-
-      // Função que busca a população de um país
-      function getPopulation(country, callback) {
-        // Faz uma chamada à API do World Bank usando a biblioteca do Fetch
-        fetch('https://api.worldbank.org/v2/country/' + country + '/indicator/SP.POP.TOTL?format=json')
-          .then(function(response) {
-            // Converte a resposta em JSON
-            return response.json();
-          })
-          .then(function(data) {
-            // Chama a função de callback com a população do país
-            callback(country, data[1][0].value);
-          });
-      }
-
-      // Função que atualiza a linha da tabela para um país dado
-      function updateRow(country, population) {
-        // Procura a linha da tabela correspondente ao país
-        for (var i = 1; i < rows.length; i++) {
-          if (rows[i].cells[0].textContent === country) {
-            // Atualiza a célula da população com o novo valor
-            rows[i].cells[1].textContent = population;
-            break;
-          }
-        }
-      }
-    </script>
   </body>
 </html>
+
