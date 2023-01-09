@@ -1,54 +1,24 @@
-<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <style>
-      /* Estilo da tabela */
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-
-      /* Estilo das células da tabela */
-      td, th {
-        border: 1px solid #ddd;
-        padding: 8px;
-      }
-
-      /* Estilo do cabeçalho da tabela */
-      th {
-        background-color: #333;
-        color: #fff;
-      }
+        body {
+            background-color: yellow;
+        }
+        .dark-mode {
+            background-color: #333;
+        }
     </style>
-  </head>
-  <body>
-    <!-- Tabela -->
-    <table id="popTable">
-      <tr>
-        <th>País</th>
-        <th>População</th>
-      </tr>
-      <tr>
-        <td>Brasil</td>
-        <td>212559417</td>
-      </tr>
-      <tr>
-        <td>Estados Unidos</td>
-        <td>331002651</td>
-      </tr>
-      <tr>
-        <td>Canadá</td>
-        <td>37411047</td>
-      </tr>
-      <tr>
-        <td>França</td>
-        <td>65273511</td>
-      </tr>
-      <tr>
-        <td>Alemanha</td>
-        <td>83783942</td>
-      </tr>
-    </table>
-  </body>
+</head>
+<body>
+    <button id="toggle-dark-mode">On/Off</button>
+
+    <script>
+        const toggleDarkMode = document.getElementById('toggle-dark-mode');
+
+        toggleDarkMode.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
 </html>
 
