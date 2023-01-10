@@ -1,70 +1,37 @@
+<!DOCTYPE html>
 <html>
-<head>
-    <style>
-        /* Estilos para o avião */
-        .airplane {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-        }
-    </style>
-</head>
 <body>
-    <!-- Imagem para o avião -->
-    <img src="airplane.png" alt="Airplane" class="airplane">
 
-    <script>
-        // Obtenha o elemento do avião
-        const airplane = document.querySelector('.airplane');
+<h1>Vídeo mais em alta no YouTube</h1>
 
-        // Defina os limites da tela
-        const screenWidth = window.innerWidth;
-        const screenHeight = window.innerHeight;
+<div id="videoContainer"></div>
 
-        // Defina a velocidade do avião
-        const speed = 5;
+<script>
+  // Configure a chave de API do YouTube
+  const API_KEY = "AIzaSyCWcrX5rlZMOzWnMdT-oe6PXslfiqE8cvk";
 
-        // Crie um objeto para armazenar as teclas pressionadas
-        const keys = {};
+  // Configure a URL da API do YouTube
+  const API_URL = "https://www.googleapis.com/youtube/v3/videos";
 
-        // Adicione um evento de teclado para monitorar as teclas pressionadas
-        document.addEventListener('keydown', (event) => {
-            keys[event.key] = true;
-        });
+  // Faça uma solicitação GET à API do YouTube para obter os detalhes do vídeo mais em alta
+  fetch(`${API_URL}?part=snippet&chart=mostPopular&key=${API_KEY}`)
+    .then(response => response.json())
+    .then(data => {
+      // Obtenha o ID e o título do primeiro vídeo da lista de resultados
+      const videoId = data.items[0].id;
+      const videoTitle = data.items[0].snippet.title;
 
-        document.addEventListener('keyup', (event) => {
-            keys[event.key] = false;
-        });
+      // Crie uma tag de vídeo e defina o ID do vídeo como o valor do atributo "src"
+      const videoElement = `<video src="https://www.youtube.com/watch?v=${videoId}" controls></video>`;
 
-        // Crie uma função para atualizar a posição do avião
-        function updatePosition() {
-            // Obtenha a posição atual do avião
-            let left = airplane.offsetLeft;
-            let top = airplane.offsetTop;
+      // Adicione o vídeo à página HTML
+      document.getElementById("videoContainer").innerHTML = videoElement;
 
-            // Verifique as teclas pressionadas e atualize a posição do avião
-            if (keys['ArrowUp']) top -= speed;
-            if (keys['ArrowDown']) top += speed;
-            if (keys['ArrowLeft']) left -= speed;
-            if (keys['ArrowRight']) left += speed;
+      // Adicione o título do vídeo à página HTML
+      document.querySelector("h1").innerText += `: ${videoTitle}`;
+    });
+</script>
 
-            // Verifique se o avião saiu da tela e o mantenha dentro dos limites
-            if (left < 0) left = 0;
-            if (left > screenWidth - airplane.offsetWidth) left = screenWidth - airplane.offsetWidth;
-            if (top < 0) top = 0;
-            if (top > screenHeight - airplane.offsetHeight) top = screenHeight - airplane.offsetHeight;
-
-            // Atualize a posição do avião
-            airplane.style.left = `${left}px`;
-            airplane.style.top = `${top}px`;
-        }
-
-        // Chame a função de atualização a cada 10 milissegundos
-        setInterval(updatePosition, 10);
-    </script>
 </body>
 </html>
 
