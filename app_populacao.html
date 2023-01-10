@@ -22,7 +22,8 @@
       const videoTitle = data.items[0].snippet.title;
 
       // Crie uma tag de vídeo e defina o ID do vídeo como o valor do atributo "src"
-      const videoElement = `<video src="https://www.youtube.com/watch?v=${videoId}" controls></video>`;
+      const videoElement = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+
 
       // Adicione o vídeo à página HTML
       document.getElementById("videoContainer").innerHTML = videoElement;
